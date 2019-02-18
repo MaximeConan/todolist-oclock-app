@@ -1,12 +1,17 @@
 // NPM Import
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 // Local Import
 
 // Code
 const Task = ({ done, label }) => (
-  <li className={done ? 'task task--done' : 'task'}>
+  <li className={classNames(
+    'task',
+    { 'task--done': done },
+  )}
+  >
     <input
       type="checkbox"
       checked={done}
