@@ -102,6 +102,25 @@ class App extends React.Component {
     })
   }
 
+  deleteTask = id => () => {
+    // Recup des taches
+    const { tasks } = this.state
+    // Nouvelle liste de tâches grace à map (nouveau tableau)
+    const newTasks = tasks.filter((task) => {
+      // Si l'id transmise est identique à la tache à modifier
+      if (id !== task.id) {
+        // On créer un nouvel objet (attention à la modif du state)
+        return tasks
+      }
+      // Si l'id ne correspond pas, pas besoin de faire de copie (pas de modif)
+    })
+
+
+    this.setState({
+      tasks: newTasks,
+    })
+  }
+
   render() {
     // Récup des tâches dans le state
     const { tasks, input } = this.state
@@ -121,6 +140,7 @@ class App extends React.Component {
           list={tasks}
           onTaskCheck={this.checkTask}
           onTaskFav={this.favTask}
+          onTaskDelete={this.deleteTask}
         />
       </div>
     )

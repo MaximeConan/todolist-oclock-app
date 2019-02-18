@@ -13,6 +13,7 @@ const Task = ({
   fav,
   onTaskCheck,
   onTaskFav,
+  onTaskDelete,
 }) => (
   <li className={classNames(
     'task',
@@ -32,9 +33,9 @@ const Task = ({
       className="fas fa-star fav"
       onClick={onTaskFav(id)}
     />
-    <i 
+    <i
       className="fas fa-trash-alt delete"
-      // onClick={onTaskDelete(id)}
+      onClick={onTaskDelete(id)}
     />
 
   </li>
@@ -47,6 +48,7 @@ Task.propTypes = {
   label: PropTypes.string.isRequired,
   onTaskCheck: PropTypes.func.isRequired,
   onTaskFav: PropTypes.func.isRequired,
+  onTaskDelete: PropTypes.func.isRequired,
 }
 
 // Export

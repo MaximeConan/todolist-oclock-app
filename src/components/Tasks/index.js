@@ -8,13 +8,19 @@ import Task from 'src/components/Tasks/Task'
 
 
 // Code
-const Tasks = ({ list, onTaskCheck, onTaskFav }) => (
+const Tasks = ({
+  list,
+  onTaskCheck,
+  onTaskFav,
+  onTaskDelete,
+}) => (
   <ul id="todo-list">
     {list.map(task => (
       <Task
         key={task.id}
         onTaskCheck={onTaskCheck}
         onTaskFav={onTaskFav}
+        onTaskDelete={onTaskDelete}
         {...task}
       />
     ))}
@@ -24,6 +30,7 @@ const Tasks = ({ list, onTaskCheck, onTaskFav }) => (
 Tasks.propTypes = {
   onTaskCheck: PropTypes.func.isRequired,
   onTaskFav: PropTypes.func.isRequired,
+  onTaskDelete: PropTypes.func.isRequired,
   list: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired).isRequired,
