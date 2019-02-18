@@ -15,23 +15,24 @@ class App extends React.Component {
   // Définition du state
   state = {
     tasks: taskList,
+    input: '',
   }
 
   addTask = () => {
-    // Récupérer l'input value
-    const input = document.getElementById('todo-input')
-    const inputValue = input.value
+    // Préparer la nouvelle liste : ancienne liste + nouvelle tâche grâce à concat()
+    const { tasks, input } = this.state
+
+    // Récupérer l'input value depuis l'input présent dans notre state
+    const inputValue = input
 
     // Préparer la nouvelle tâche
-    const lastId = Math.max(...taskList.map(task => task.id)) + 1
+    const lastId = Math.max(...tasks.map(task => task.id)) + 1
 
     const newTask = {
       id: lastId,
       label: inputValue,
       done: false,
     }
-    // Préparer la nouvelle liste : ancienne liste + nouvelle tâche grâce à concat()
-    const { tasks } = this.state
 
     // On créé un nouveau tableau avec l'ancienne liste et le nouvelle élément
     const newTasks = [...tasks, newTask]
@@ -39,19 +40,31 @@ class App extends React.Component {
     // Modification du state
     this.setState({
       tasks: newTasks,
+      input: '',
+    })
+  }
+
+  changeInput = (inputValue) => {
+    // Changer le state via setState
+    this.setState({
+      input: inputValue,
     })
   }
 
   render() {
     // Récup des tâches dans le state
-    const { tasks } = this.state
+    const { tasks, input } = this.state
 
     // Récup du nombre de tâches en cours
     const count = tasks.filter(task => !task.done).length
 
     return (
       <div id="app">
-        <Form onAddTask={this.addTask} />
+        <Form
+          inputValue={input}
+          onAddTask={this.addTask}
+          onChangeInput={this.changeInput}
+        />
         <Counter count={count} />
         <Tasks list={tasks} />
       </div>

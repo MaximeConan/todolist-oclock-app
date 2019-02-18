@@ -14,7 +14,15 @@ class Form extends React.Component {
     onAddTask()
   }
 
+  handleChange = (event) => {
+    const { value } = event.target
+    const { onChangeInput } = this.props
+    onChangeInput(value)
+  }
+
   render() {
+    const { inputValue } = this.props
+
     return (
       <form
         id="todo-form"
@@ -25,6 +33,8 @@ class Form extends React.Component {
           id="todo-input"
           placeholder="Ajouter une tâche"
           autoComplete="off"
+          value={inputValue}
+          onChange={this.handleChange}
         />
       </form>
     )
@@ -33,6 +43,8 @@ class Form extends React.Component {
 
 Form.propTypes = {
   onAddTask: PropTypes.func.isRequired,
+  onChangeInput: PropTypes.func.isRequired,
+  inputValue: PropTypes.string.isRequired,
 }
 
 // Export
