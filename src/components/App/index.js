@@ -17,6 +17,11 @@ class App extends React.Component {
     tasks: taskList,
   }
 
+  addTask = () => {
+    // Modification du state
+    console.log('App : setState avec une tâche')
+  }
+
   render() {
     // Récup des tâches dans le state
     const { tasks } = this.state
@@ -26,7 +31,7 @@ class App extends React.Component {
 
     return (
       <div id="app">
-        <Form />
+        <Form onAddTask={this.addTask} />
         <Counter count={count} />
         <Tasks list={tasks} />
       </div>
