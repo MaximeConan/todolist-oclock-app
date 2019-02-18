@@ -32,6 +32,7 @@ class App extends React.Component {
       id: lastId,
       label: inputValue,
       done: false,
+      fav: false,
     }
 
     // On créé un nouveau tableau avec l'ancienne liste et le nouvelle élément
@@ -51,6 +52,56 @@ class App extends React.Component {
     })
   }
 
+  checkTask = id => () => {
+    // Recup des taches
+    const { tasks } = this.state
+    // Nouvelle liste de tâches grace à map (nouveau tableau)
+    const newTasks = tasks.map((task) => {
+      // Si l'id transmise est identique à la tache à modifier
+      if (id === task.id) {
+        // On créer un nouvel objet (attention à la modif du state)
+        return {
+          // Je recup tout le contenu de la tâche
+          ...task,
+          // Je change juste la clé done vers l'inverse
+          done: !task.done,
+        }
+      }
+      // Si l'id ne correspond pas, pas besoin de faire de copie (pas de modif)
+      return task
+    })
+
+
+    this.setState({
+      tasks: newTasks,
+    })
+  }
+
+  favTask = id => () => {
+    // Recup des taches
+    const { tasks } = this.state
+    // Nouvelle liste de tâches grace à map (nouveau tableau)
+    const newTasks = tasks.map((task) => {
+      // Si l'id transmise est identique à la tache à modifier
+      if (id === task.id) {
+        // On créer un nouvel objet (attention à la modif du state)
+        return {
+          // Je recup tout le contenu de la tâche
+          ...task,
+          // Je change juste la clé done vers l'inverse
+          fav: !task.fav,
+        }
+      }
+      // Si l'id ne correspond pas, pas besoin de faire de copie (pas de modif)
+      return task
+    })
+
+
+    this.setState({
+      tasks: newTasks,
+    })
+  }
+
   render() {
     // Récup des tâches dans le state
     const { tasks, input } = this.state
@@ -66,7 +117,11 @@ class App extends React.Component {
           onChangeInput={this.changeInput}
         />
         <Counter count={count} />
-        <Tasks list={tasks} />
+        <Tasks
+          list={tasks}
+          onTaskCheck={this.checkTask}
+          onTaskFav={this.favTask}
+        />
       </div>
     )
   }

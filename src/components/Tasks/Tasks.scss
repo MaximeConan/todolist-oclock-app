@@ -23,4 +23,20 @@
     border-radius: 5px;
     margin-bottom: 1em;
   }
+
+  &--fav {
+    background-color: #2bd240;
+    color: #FFF; 
+    padding: 1.5em;
+    border-radius: 5px;
+    margin-bottom: 1em;  
+  }
+}
+
+i {
+  float: right;
+}
+
+.delete {
+  margin-right: .5em;
 }
