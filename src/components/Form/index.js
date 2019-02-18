@@ -22,7 +22,7 @@ class Form extends React.Component {
       >
         <input
           type="text"
-          id="toto-input"
+          id="todo-input"
           placeholder="Ajouter une tâche"
           autoComplete="off"
         />

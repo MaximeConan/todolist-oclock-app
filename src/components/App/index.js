@@ -18,8 +18,28 @@ class App extends React.Component {
   }
 
   addTask = () => {
+    // Récupérer l'input value
+    const input = document.getElementById('todo-input')
+    const inputValue = input.value
+
+    // Préparer la nouvelle tâche
+    const lastId = Math.max(...taskList.map(task => task.id)) + 1
+
+    const newTask = {
+      id: lastId,
+      label: inputValue,
+      done: false,
+    }
+    // Préparer la nouvelle liste : ancienne liste + nouvelle tâche grâce à concat()
+    const { tasks } = this.state
+
+    // On créé un nouveau tableau avec l'ancienne liste et le nouvelle élément
+    const newTasks = [...tasks, newTask]
+
     // Modification du state
-    console.log('App : setState avec une tâche')
+    this.setState({
+      tasks: newTasks,
+    })
   }
 
   render() {
