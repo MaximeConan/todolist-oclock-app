@@ -1,0 +1,26 @@
+.task {
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 1.5em;
+  box-shadow: 1px 1px 30px #7d2525;
+  margin-bottom: 1em;
+  transition: all .3s;
+
+  &:hover {
+    box-shadow: 1px 1px 5px #7d2525;
+    transform: scale(1.02);
+  }
+
+  &-label {
+    margin-left: .5em;
+  }
+
+  &--done {
+    background-color: #fdc72e;
+    color: #FFF; 
+    text-decoration: line-through;
+    padding: 1.5em;
+    border-radius: 5px;
+    margin-bottom: 1em;
+  }
+}

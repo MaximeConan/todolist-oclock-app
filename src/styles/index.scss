@@ -1,0 +1,7 @@
+@import 'reset';
+@import 'src/styles/vars';
+
+body {
+  background-color: $bg-color;
+  font-family: 'Source Sans Pro', sans-serif;
+}
