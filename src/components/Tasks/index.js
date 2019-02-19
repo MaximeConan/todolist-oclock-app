@@ -28,7 +28,7 @@ Tasks.propTypes = {
     PropTypes.func.isRequired,
   ).isRequired,
   list: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired).isRequired,
 }
 

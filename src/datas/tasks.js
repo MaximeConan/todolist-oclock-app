@@ -1,18 +1,20 @@
+import uuidv4 from 'uuid/v4'
+
 export default [
   {
-    id: 1,
+    id: uuidv4(),
     done: false,
     fav: true,
     label: 'Coder une totolist',
   },
   {
-    id: 3,
+    id: uuidv4(),
     done: false,
     fav: false,
     label: 'Faire les courses',
   },
   {
-    id: 5,
+    id: uuidv4(),
     done: true,
     fav: false,
     label: 'Aller à la salle',

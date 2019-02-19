@@ -47,7 +47,7 @@ const Task = ({
 }
 
 Task.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   done: PropTypes.bool.isRequired,
   fav: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,

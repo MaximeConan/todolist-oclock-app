@@ -1,5 +1,6 @@
 // NPM Import
 import React from 'react'
+import uuidv4 from 'uuid/v4'
 
 // Local Import
 import './App.scss'
@@ -25,12 +26,9 @@ class App extends React.Component {
     // Récupérer l'input value depuis l'input présent dans notre state
     const inputValue = input.trim()
 
-    // Préparer la nouvelle tâche
-    const lastId = Math.max(...tasks.map(task => task.id)) + 1
-
     if (inputValue !== '') {
       const newTask = {
-        id: lastId,
+        id: uuidv4(),
         label: inputValue,
         done: false,
         fav: false,
