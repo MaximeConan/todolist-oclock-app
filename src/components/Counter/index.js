@@ -11,7 +11,7 @@ const Counter = ({ count }) => {
 
   switch (count) {
     case 0:
-      message = 'Aucune tâche'
+      message = 'Aucune tâche à effectuer'
       break
 
     case 1:
@@ -30,7 +30,7 @@ const Counter = ({ count }) => {
   )
 }
 
-Counter.protoTypes = {
+Counter.propTypes = {
   count: PropTypes.number.isRequired,
 }
 

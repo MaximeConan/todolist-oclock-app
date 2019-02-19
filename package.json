@@ -47,7 +47,9 @@
     "@babel/polyfill": "*",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
+    "re-base": "^4.0.0",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "react-icons": "^3.4.0"
   }
 }

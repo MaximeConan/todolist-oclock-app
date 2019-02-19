@@ -1,7 +1,7 @@
 export default [
   {
     id: 1,
-    done: true,
+    done: false,
     fav: true,
     label: 'Coder une totolist',
   },

@@ -1,3 +1,5 @@
+@import 'src/styles/vars';
+
 #todo-list {
   display: flex;
   flex-direction: column;
@@ -23,7 +25,6 @@
 
   &--done {
     background-color: #fdc72e;
-    color: #FFF; 
     text-decoration: line-through;
     padding: 1.5em;
     border-radius: 5px;
@@ -39,12 +40,13 @@
     margin-bottom: 1em; 
     order: -2; 
   }
+
+  &-fav, &-trash {
+    margin : 0 .2em;
+    float: right;
+  }
 }
 
 i {
   float: right;
-}
-
-.delete {
-  margin-right: .5em;
 }

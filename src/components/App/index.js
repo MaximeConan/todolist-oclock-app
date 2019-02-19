@@ -23,26 +23,28 @@ class App extends React.Component {
     const { tasks, input } = this.state
 
     // Récupérer l'input value depuis l'input présent dans notre state
-    const inputValue = input
+    const inputValue = input.trim()
 
     // Préparer la nouvelle tâche
     const lastId = Math.max(...tasks.map(task => task.id)) + 1
 
-    const newTask = {
-      id: lastId,
-      label: inputValue,
-      done: false,
-      fav: false,
+    if (inputValue !== '') {
+      const newTask = {
+        id: lastId,
+        label: inputValue,
+        done: false,
+        fav: false,
+      }
+
+      // On créé un nouveau tableau avec l'ancienne liste et le nouvelle élément
+      const newTasks = [...tasks, newTask]
+
+      // Modification du state
+      this.setState({
+        tasks: newTasks,
+        input: '',
+      })
     }
-
-    // On créé un nouveau tableau avec l'ancienne liste et le nouvelle élément
-    const newTasks = [...tasks, newTask]
-
-    // Modification du state
-    this.setState({
-      tasks: newTasks,
-      input: '',
-    })
   }
 
   changeInput = (inputValue) => {
@@ -60,17 +62,12 @@ class App extends React.Component {
       // Si l'id transmise est identique à la tache à modifier
       if (id === task.id) {
         // On créer un nouvel objet (attention à la modif du state)
-        return {
-          // Je recup tout le contenu de la tâche
-          ...task,
-          // Je change juste la clé done vers l'inverse
-          done: !task.done,
-        }
+        // Je change juste la clé done vers l'inverse
+        return { ...task, done: !task.done }
       }
       // Si l'id ne correspond pas, pas besoin de faire de copie (pas de modif)
       return task
     })
-
 
     this.setState({
       tasks: newTasks,
@@ -85,36 +82,22 @@ class App extends React.Component {
       // Si l'id transmise est identique à la tache à modifier
       if (id === task.id) {
         // On créer un nouvel objet (attention à la modif du state)
-        return {
-          // Je recup tout le contenu de la tâche
-          ...task,
-          // Je change juste la clé done vers l'inverse
-          fav: !task.fav,
-        }
+        // Je change juste la clé done vers l'inverse
+        return { ...task, fav: !task.fav }
       }
       // Si l'id ne correspond pas, pas besoin de faire de copie (pas de modif)
       return task
     })
-
 
     this.setState({
       tasks: newTasks,
     })
   }
 
-  deleteTask = id => () => {
-    // Recup des taches
+  removeTask = id => () => {
     const { tasks } = this.state
-    // Nouvelle liste de tâches grace à map (nouveau tableau)
-    const newTasks = tasks.filter((task) => {
-      // Si l'id transmise est identique à la tache à modifier
-      if (id !== task.id) {
-        // On créer un nouvel objet (attention à la modif du state)
-        return tasks
-      }
-      // Si l'id ne correspond pas, pas besoin de faire de copie (pas de modif)
-    })
 
+    const newTasks = tasks.filter(task => task.id !== id)
 
     this.setState({
       tasks: newTasks,
@@ -128,6 +111,13 @@ class App extends React.Component {
     // Récup du nombre de tâches en cours
     const count = tasks.filter(task => !task.done).length
 
+    // Gérer l'ordre d'apprition des tâches
+    const filteredTasks = [
+      ...tasks.filter(task => !task.done && task.fav),
+      ...tasks.filter(task => !task.done && !task.fav),
+      ...tasks.filter(task => task.done),
+    ]
+
     return (
       <div id="app">
         <Form
@@ -137,10 +127,12 @@ class App extends React.Component {
         />
         <Counter count={count} />
         <Tasks
-          list={tasks}
-          onTaskCheck={this.checkTask}
-          onTaskFav={this.favTask}
-          onTaskDelete={this.deleteTask}
+          list={filteredTasks}
+          actions={{
+            onTaskCheck: this.checkTask,
+            onTaskRemove: this.removeTask,
+            onTaskFav: this.favTask,
+          }}
         />
       </div>
     )

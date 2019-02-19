@@ -2,6 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { FaTrash, FaStar, FaRegStar } from 'react-icons/fa'
 
 // Local Import
 
@@ -9,37 +10,41 @@ import classNames from 'classnames'
 const Task = ({
   id,
   done,
-  label,
   fav,
+  label,
   onTaskCheck,
+  onTaskRemove,
   onTaskFav,
-  onTaskDelete,
-}) => (
-  <li className={classNames(
-    'task',
-    { 'task--done': done },
-    { 'task--fav': fav },
-  )}
-  >
-    <input
-      type="checkbox"
-      checked={done}
-      onChange={onTaskCheck(id)}
-    />
-    <span className="task-label">
-      {label}
-    </span>
-    <i
-      className="fas fa-star fav"
-      onClick={onTaskFav(id)}
-    />
-    <i
-      className="fas fa-trash-alt delete"
-      onClick={onTaskDelete(id)}
-    />
+}) => {
+  // On change l'icône selon si la tâche est fav ou non
+  const Favorite = fav ? FaStar : FaRegStar
 
-  </li>
-)
+  return (
+    <li className={classNames(
+      'task',
+      { 'task--done': done },
+      { 'task--fav': fav },
+    )}
+    >
+      <input
+        type="checkbox"
+        checked={done}
+        onChange={onTaskCheck(id)}
+      />
+      <span className="task-label">
+        {label}
+      </span>
+      <Favorite
+        className="task-fav"
+        onClick={onTaskFav(id)}
+      />
+      <FaTrash
+        className="task-trash"
+        onClick={onTaskRemove(id)}
+      />
+    </li>
+  )
+}
 
 Task.propTypes = {
   id: PropTypes.number.isRequired,
@@ -47,8 +52,8 @@ Task.propTypes = {
   fav: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
   onTaskCheck: PropTypes.func.isRequired,
+  onTaskRemove: PropTypes.func.isRequired,
   onTaskFav: PropTypes.func.isRequired,
-  onTaskDelete: PropTypes.func.isRequired,
 }
 
 // Export
